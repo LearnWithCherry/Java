@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+class Person {
+    String name;
+    int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // This method returns a copy of the object
+    public Person generateScriptID() {
+        return new Person(name, age);
+    }
+
+    // Needed so System.out.println shows actual data
+    @Override
+    public String toString() {
+        return name + age;
+    }
+}
+
+class EnigmaScribe extends Person {
+    String personType;
+
+    // Fixed constructor to match your main method logic
+    public EnigmaScribe(String name, int age, String personType) {
+        super(name, age);
+        this.personType = personType;
+    }
+
+    @Override
+    public EnigmaScribe generateScriptID() {
+        // Returns a new EnigmaScribe object (Covariant return type)
+        return new EnigmaScribe(name, age, personType);
+    }
+    
+    @Override
+    public String toString() {
+        return name + age + " (" + personType + ")";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        if (!scanner.hasNextLine()) return;
+        String name = scanner.nextLine();
+        
+        if (!scanner.hasNextInt()) return;
+        int age = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        
+        if (!scanner.hasNextLine()) return;
+        String personType = scanner.nextLine();
+        
+        Person person;
+        if ("EnigmaScribe".equals(personType)) {
+            // Pass all three arguments to the constructor
+            person = new EnigmaScribe(name, age, personType);
+            
+            // This now prints the result of the toString() method
+            System.out.println(person.generateScriptID());
+        } else {
+            System.out.println("Null");
+        }
+        
+        scanner.close();
+    }
+}

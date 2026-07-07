@@ -1,4 +1,4 @@
-# Java Project
+# Java Project ✘
 
 ## 📌 Overview
 This repository contains a Java-based project designed to demonstrate core concepts, best practices, and reusable code structures.  
